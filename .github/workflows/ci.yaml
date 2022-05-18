@@ -28,4 +28,4 @@ jobs:
           endpoint: https://example.com
       - name: Refresh Feed
         run: |
-          echo ${{env}}
+          echo ${{env.fetch-api-data}}
