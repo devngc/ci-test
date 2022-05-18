@@ -19,14 +19,12 @@ jobs:
 
 
 
-  diff:
+  refresh-feed:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v6
+      - name: Fetch API Data 📦
+        uses: JamesIves/fetch-api-data-action@v2.1.0
         with:
-          script: |
-            const diff_url = https://api.github.com/repos/pollination-apps/ci-test/events
-            const result = await github.request(diff_url)
-            console.log(result[1])
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          endpoint: https://example.com
+        run: |
+          echo ${{env}}
