@@ -1,0 +1,19 @@
+---
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+
+  print_context:
+    name: print-context
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
+          echo ${{github.ref}}
+          echo ${{github.event.repository.owner.name}}
+
+
