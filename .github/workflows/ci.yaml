@@ -11,12 +11,23 @@ jobs:
     steps:
       - env:
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
-          EVENT_URL: ${{ toJSON(github.event.organization.events_url) }}
         run: |
           echo $EVENT_CONTEXT
           echo ${{github.ref}}
           echo ${{github.event.repository.owner.name}}
           # echo ${{github.event.organization.events_url[1].payload.pull_request.title}}
-          echo $EVENT_URL
 
 
+
+  logLatestRelease:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/request-action@v2.x
+        id: get_latest_release
+        with:
+          route: GET /repos/{owner}/{repo}/releases/latest
+          owner: ${{github.event.repository.owner.name}}
+          repo: ${{github.event.repository.name}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo latest release: ${{ steps.get_latest_release.outputs.data }}"
