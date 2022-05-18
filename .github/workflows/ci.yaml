@@ -28,4 +28,4 @@ jobs:
           endpoint: https://api.github.com/orgs/pollination-apps/events
       - name: test data
         run: |
-          echo $fetch-api-data
+          echo ${{ env.fetch_api_data }}
