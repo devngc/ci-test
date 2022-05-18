@@ -15,5 +15,6 @@ jobs:
           echo $EVENT_CONTEXT
           echo ${{github.ref}}
           echo ${{github.event.repository.owner.name}}
+          echo ${{github.event.organization.events_url[1].payload.pull_request.title}}
 
 
